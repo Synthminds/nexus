@@ -8,6 +8,10 @@ Make the next adapter session shorter using evidence from this one, and record
 the change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-llm-adapters/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session. Where did this skill send you to the right place, and where
    did you have to read source it should have pointed at?
 2. If you hit a symptom that was not in `references/symptoms.md`, add a row: the
@@ -24,7 +28,10 @@ the change.
    and line numbers MUST NOT accumulate here; replace them with a command that
    produces current truth.
 7. Append to `../refinement-log.md`: date, observation, change, files touched.
-8. Re-run the validator on this skill directory:
+8. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+9. Re-run the validator on this skill directory:
    `python3 <installed-skill-crafter>/scripts/validate_skill.py .claude/skills/nexus-llm-adapters`.
    Resolve the installed skill-crafter path first, then resolve anything it flags.
 

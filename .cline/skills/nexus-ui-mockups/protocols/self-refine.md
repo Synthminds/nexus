@@ -8,6 +8,10 @@ Improve this skill for next time using evidence from this session and the user's
 feedback, and record the change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-ui-mockups/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: where did the mockup work go smoothly, and where did this
    skill leave you guessing or send you somewhere wrong.
 2. Ask the user for one concrete piece of feedback if any is available — most
@@ -23,7 +27,10 @@ feedback, and record the change.
 5. If a claim in this skill turned out to be wrong about the repo, fix it against
    the tree in the same pass and say so in the log entry.
 6. Append an entry to `../refinement-log.md`: date, observation, change, files.
-7. Re-run the validation so the change does not regress anything:
+7. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+8. Re-run the validation so the change does not regress anything:
    `python3 .claude/skills/nexus-ui-mockups/scripts/check_mockup.py` from the
    repo root, and re-read the router to confirm it stayed slim.
 

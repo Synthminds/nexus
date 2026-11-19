@@ -40,3 +40,5 @@ their tools appear in no export.
 - 2026-10-07 | Rebase overlapped generated catalogs from instruction-library and remote-delegation changes. Regenerating the combined live registry resolved conflicts and catalog/consumer checks passed. | No procedure change; refresh-catalog already forbids hand-patching generated JSON.
 
 - 2026-10-13 | Patch-release lifecycle regenerated both versioned exports and compatibility aliases; catalog validation and full-suite guidance/drift tests passed without tool-payload changes. | No protocol change.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

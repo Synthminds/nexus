@@ -8,6 +8,10 @@ Improve this skill for next time using evidence from this session and user
 feedback, and record the change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-eval-harness/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: what went smoothly, and where did using this skill hit
    friction. Anything the harness did that this skill did not predict is the
    strongest candidate.
@@ -22,7 +26,10 @@ feedback, and record the change.
    number while refining. Those rot within a release and then mislead; add the
    command that derives them instead.
 6. Append an entry to `../refinement-log.md`: date, observation, change, files.
-7. Re-run the validation so the change does not regress this skill:
+7. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+8. Re-run the validation so the change does not regress this skill:
 
    ```bash
    python3 .claude/skills/nexus-eval-harness/scripts/check_scenarios.py

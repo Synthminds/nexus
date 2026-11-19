@@ -9,6 +9,10 @@ Fold what this release taught into the skill, and record it, so the next release
 does not rediscover it.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-release/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: which steps ran cleanly, and where did the procedure lag
    reality — a command that did not exist, a file that had moved, a failure the
    protocol did not anticipate, a check that fired falsely.
@@ -21,10 +25,10 @@ does not rediscover it.
 4. Apply it. If the friction was a **wrong claim**, verify the replacement against
    the tree before writing it — the whole point of this skill is that a release
    step nobody checked is a release that ships broken.
-5. You MUST apply the edit to `<repo>/.skills/nexus-release/`, the sync source,
-   and then run `npm run sync:skills`. An edit made only in a mirror
-   (`.claude/`, `.codex/`, `.cline/`) is partly reverted on the next sync.
-6. Append an entry to `../refinement-log.md`: date, observation, change, files.
+5. Append an entry to `../refinement-log.md`: date, observation, change, files.
+6. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
 7. Re-run the checks so the refinement did not regress the skill:
    ```bash
    python3 .claude/skills/nexus-release/scripts/check_release_ready.py

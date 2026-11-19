@@ -51,6 +51,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # .skills/ is the source and .claude/, .codex/ and .cline/ are generated
+      # mirrors. An edit made in a mirror, or a source edit that was never
+      # synced, is reverted by the next `npm run sync:skills`. This fails the PR
+      # instead.
+      - name: Skill mirrors match .skills/
+        run: node scripts/sync-agent-context.mjs --skills-only --check
+
       - name: Lint (ESLint + mobile reachability gate)
         run: npm run lint
 

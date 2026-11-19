@@ -42,3 +42,5 @@ in this skill.
 
 - 2026-10-03: No change. User removed explanatory helper copy and required existing UI primitives; existing fidelity/handoff guidance already requires reuse, and the accepted contract records that correction.
 - 2026-10-07 | Remote-agent mockup passed validation and production settings were inspected in the native Code-vault Settings window, including scrolling and empty-input validation. | No procedure change.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

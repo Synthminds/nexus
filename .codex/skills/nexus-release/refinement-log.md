@@ -119,3 +119,5 @@ verification. | Added Windows binary discovery and CLI-toggle guidance to the
 release verification step. | `protocols/cut-release.md`.
 
 - 2026-10-13 | Release candidate matched installed files, but CLI reload success retained the old running manifest version. A vault-asserted disable/manifest refresh/enable loaded the new version and fresh error capture stayed clean. | Added bundle, installed-manifest and running-version verification to cut-release step 8.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

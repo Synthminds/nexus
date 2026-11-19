@@ -98,3 +98,5 @@ skill.
 ## 2026-10-13 — Setup detection
 
 - No change: desktop config detection reused lazy desktopRequire calls behind capability guards. The production build passed the mobile import reachability check.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

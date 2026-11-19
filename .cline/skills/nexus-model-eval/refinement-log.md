@@ -19,3 +19,5 @@ and three scripts; re-verified every retained claim against the harness source;
 drew an explicit boundary with `nexus-eval-harness` (it owns the instrument,
 this skill owns the verdict) and dropped the scenario-satisfiability checker in
 favour of that skill's. | whole skill.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.
