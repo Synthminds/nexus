@@ -37,3 +37,5 @@ fails on the selector-blind `getTools` trap. | every file in this skill.
   across models is the tell. Verified: glm-5.3-flash passes first attempt, 0
   retries. | Files: `tests/eval/scenarios/multi-turn.eval.yaml`,
   `references/scenario-contract.md`.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

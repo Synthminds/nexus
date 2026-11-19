@@ -9,6 +9,10 @@ Turn one piece of friction from this session into a durable fix in this skill, a
 record it.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-storage/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: which step landed cleanly, and where did you have to read
    Nexus source because this skill did not say enough — or said something the tree
    contradicted.
@@ -22,7 +26,10 @@ record it.
 5. If the fix corrects a factual claim, verify the correction against the tree
    before writing it. A wrong storage fact costs data.
 6. Append an entry to `../refinement-log.md`: date, observation, change, files.
-7. Re-run the checks so the change did not regress the skill:
+7. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+8. Re-run the checks so the change did not regress the skill:
    ```bash
    python3 .claude/skills/nexus-storage/scripts/check_schema_consistency.py .
    python3 <installed-skill-crafter>/scripts/validate_skill.py .claude/skills/nexus-storage

@@ -9,6 +9,10 @@ Improve this skill for next time using evidence from this session and user
 feedback, and record the change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-mobile-compat/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: what went smoothly, and where using this skill hit
    friction. Give particular weight to anything the checker got wrong — a false
    positive or, worse, a real crash it did not see. Those are script bugs, and
@@ -21,7 +25,10 @@ feedback, and record the change.
    surrounding claim can be replaced by a command that produces current truth.
 4. Apply it to the right file: router, reference, protocol, or script.
 5. Append an entry to `../refinement-log.md`: date, observation, change, files.
-6. Re-run this skill's validation so the change does not regress it:
+6. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+7. Re-run this skill's validation so the change does not regress it:
    ```bash
    python3 /tmp/skill-crafter/skills/skill-crafter/scripts/validate_skill.py \
      .claude/skills/nexus-mobile-compat

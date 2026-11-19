@@ -7,6 +7,10 @@ session that executes it owes this log a correction.
 
 ## Steps
 
+Make every edit in `<repo>/.skills/nexus-testing/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: what went smoothly, and where using this skill hit
    friction. A command that did not exist, a path that had moved, a lane that
    was not where the skill said — those are the entries worth having.
@@ -25,7 +29,10 @@ session that executes it owes this log a correction.
 6. Verify no stale content crept in. This skill must contain no test counts, no
    lane inventories and no env-var tables — only commands that produce them.
 7. Append an entry to `../refinement-log.md`: date, observation, change, files.
-8. Re-run the checks so the change did not regress anything:
+8. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+9. Re-run the checks so the change did not regress anything:
 
    ```bash
    python3 <installed-skill-crafter>/scripts/validate_skill.py .claude/skills/nexus-testing

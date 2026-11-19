@@ -9,6 +9,10 @@ Make the next model session shorter using evidence from this one, and record the
 change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-model-updates/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session. Where did this skill send you straight to the right file,
    and where did you have to read source it should have pointed at?
 2. Delete anything you found stale. Model ids, prices, context windows, provider
@@ -31,7 +35,10 @@ change.
 6. Apply the single smallest durable fix. Sharpen an existing file before adding
    a new one, and put new detail in `../references/`, NEVER in the router.
 7. Append to `../refinement-log.md`: date, observation, change, files touched.
-8. Re-run the checks:
+8. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+9. Re-run the checks:
 
    ```bash
    python3 .claude/skills/nexus-model-updates/scripts/check_model_registry.py \

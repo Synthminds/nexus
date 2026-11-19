@@ -43,3 +43,5 @@ whole skill.
 - 2026-10-07 | Remote delegation reused prompt sub with a target and trusted runtime identity; generated catalogs and dispatch mutation checks caught routing regressions. | No procedure change.
 
 - 2026-10-07 | OpenClaw uses the existing prompt sub target path and trusted originating-chat context. No tool schema changed; existing tool verification guidance applied without correction. | No change to procedure.
+
+- 2026-11-19 | Self-refine could leave an edit only in a mirror, or sync before the log line, and the next sync then reverted it. | The steps now name `.skills/` as the place to edit and run `npm run sync:skills` after the last edit, before the checks; PR CI runs the skills sync check. | Files: `protocols/self-refine.md`, `.github/workflows/pr.yml`.

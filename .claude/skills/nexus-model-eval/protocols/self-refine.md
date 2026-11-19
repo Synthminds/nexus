@@ -8,6 +8,10 @@ where an attribution took longer than it should have or a claim here was wrong.
 Improve this skill using evidence from this session, and record the change.
 
 ## Steps
+Make every edit in `<repo>/.skills/nexus-model-eval/`, the sync source,
+and never in a mirror (`.claude/`, `.codex/`, `.cline/`). Every relative path
+below names a file in that folder.
+
 1. Review the session: which failure took the longest to attribute, what did you
    have to read the harness source to learn, and where did this skill send you
    somewhere that did not match the tree.
@@ -24,13 +28,16 @@ Improve this skill using evidence from this session, and record the change.
 5. Check the boundary: if the change is really about running, configuring or
    fixing the harness, it belongs to `nexus-eval-harness`. Put it there, or name
    it there, rather than growing a second copy here.
-6. Re-run the checks so the change does not regress the skill:
+6. Append one line to `../refinement-log.md`: date, observation, change, files.
+7. Run `npm run sync:skills` after the last edit, the log line included. It
+   copies the source over the three mirrors. An edit made only in a mirror is
+   reverted by the next sync, and the skills sync check in PR CI fails on it.
+8. Re-run the checks so the change does not regress the skill:
    ```bash
    python3 .claude/skills/nexus-model-eval/scripts/check_advertised_tools.py
    python3 .claude/skills/nexus-model-eval/scripts/summarize_eval.py --help
    ```
-7. Append one line to `../refinement-log.md`: date, observation, change, files.
-8. Report the change and the log entry to the user.
+9. Report the change and the log entry to the user.
 
 ## Guidelines
 - Pattern: one evidence-backed fix per session. The log should read as a history
